@@ -1,3 +1,43 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="nav is-secondary" *ngIf="isLoggedIn()">
+  <div class="nav-left">
+    <a class="nav-item">
+      <h1 class="title">Attend.ly</h1>
+    </a>
+  </div>
+
+  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+  <span class="nav-toggle" (click)="isMenuOpen = !isMenuOpen;">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+
+  <!-- This "nav-menu" is hidden on mobile -->
+  <!-- Add the modifier "is-active" to display it on mobile -->
+  <div class="nav-right nav-menu " [ngClass]="{'is-active': isMenuOpen}">
+    <a class="nav-item" routerLink="/home" routerLinkActive="is-active">
+      Home
+    </a>
+
+
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="footer" style="margin-top:48px;">
+ <div class="container">
+   <div class="content has-text-centered">
+     <p>
+       <strong>Attend.ly</strong>
+       &copy; 2017
+     </p>
+     <p>
+       <a class="icon" href="https://github.com/jgthms/bulma">
+         <i class="fa fa-github"></i>
+       </a>
+     </p>
+   </div>
+ </div>
+</footer>
