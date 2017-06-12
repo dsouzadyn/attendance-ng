@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { SemSelectorComponent } from './sem-selector/sem-selector.component';
-import { RecordsComponent } from './records/records.component';
+import { LoginService } from './login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,10 +7,14 @@ import { RecordsComponent } from './records/records.component';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
+
   isMenuOpen = false;
-  loggedIn = false;
   title = 'app works!';
+
+  constructor(private authService: LoginService) {}
+
   isLoggedIn() {
-    return this.loggedIn;
+    return this.authService.token && true;
   }
+
 }

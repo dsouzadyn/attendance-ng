@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  selectorForm: FormGroup;
+  errMsg: string;
+
+  constructor(
+    private router: Router,
+    fb: FormBuilder
+  ) {
+    this.selectorForm = fb.group({
+      'branch': [null, Validators.required],
+      'semester': [null, Validators.required]
+    });
+  }
 
   ngOnInit() {
+
+  }
+
+  submitForm(value: any): void {
+    console.log(value);
   }
 
 }

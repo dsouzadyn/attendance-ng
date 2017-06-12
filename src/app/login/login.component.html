@@ -10,28 +10,28 @@
         <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
           <p class="subtitle has-text-centered">Sign In</p>
           <div class="field">
-            <p class="control has-icons-left" [ngClass]="{'has-icons-right': !loginForm.controls['username'].valid }">
-              <input class="input" type="text" [ngClass]="{'is-danger': !loginForm.controls['username'].valid }" name="username" placeholder="Username" [formControl]="loginForm.controls['username']">
+            <p class="control has-icons-left" [ngClass]="{'has-icons-right': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }">
+              <input class="input" type="text" [ngClass]="{'is-danger': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }" name="username" placeholder="Username" [formControl]="loginForm.controls['username']">
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
-              <span class="icon is-small is-right" *ngIf="!loginForm.controls['username'].valid">
+              <span class="icon is-small is-right" *ngIf="!loginForm.controls['username'].valid && !loginForm.controls['username'].pristine">
                 <i class="fa fa-warning"></i>
               </span>
             </p>
-            <p class="help is-danger" *ngIf="!loginForm.controls['username'].valid">This username is invalid</p>
+            <p class="help is-danger" *ngIf="!loginForm.controls['username'].valid && !loginForm.controls['username'].pristine">This username is invalid</p>
           </div>
           <div class="field">
-            <p class="control has-icons-left"  [ngClass]="{'has-icons-right': !loginForm.controls['password'].valid }">
-              <input class="input" type="password" [ngClass]="{'is-danger': !loginForm.controls['password'].valid}" name="password" placeholder="Password" [formControl]="loginForm.controls['password']">
+            <p class="control has-icons-left"  [ngClass]="{'has-icons-right': !loginForm.controls['password'].valid && !loginForm.controls['password'].pristine }">
+              <input class="input" type="password" [ngClass]="{'is-danger': !loginForm.controls['password'].valid && !loginForm.controls['password'].pristine}" name="password" placeholder="Password" [formControl]="loginForm.controls['password']">
               <span class="icon is-small is-left">
                 <i class="fa fa-lock"></i>
               </span>
-              <span class="icon is-small is-right" *ngIf="!loginForm.controls['password'].valid">
+              <span class="icon is-small is-right" *ngIf="!loginForm.controls['password'].valid && !loginForm.controls['password'].pristine">
                 <i class="fa fa-warning"></i>
               </span>
             </p>
-            <p class="help is-danger" *ngIf="!loginForm.controls['password'].valid">Please enter a password</p>
+            <p class="help is-danger" *ngIf="!loginForm.controls['password'].valid && !loginForm.controls['password'].pristine">Please enter a password</p>
           </div>
           <div class="field">
             <p class="control">
@@ -43,7 +43,7 @@
 
           <div class="field">
             <p class="control">
-              <a class="button is-fullwidth" routerLink="/signup">Sign Up</a>
+              <a class="button is-fullwidth" [routerLink]="['/signup']">Sign Up</a>
             </p>
           </div>
         </form>

@@ -1,3 +1,69 @@
-<p>
-  signup works!
-</p>
+<div class="container is-fluid" style="margin-top:64px;">
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title is-2 has-text-centered">Attend.ly</h1>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-4 is-offset-4" style="box-sizing: border-box;padding:18px;">
+      <div class="box">
+        <form [formGroup]="signUpForm" (ngSubmit)="submitForm(signUpForm.value)">
+          <p class="subtitle has-text-centered">Registration</p>
+          <div *ngIf='errorMessage' class="notification is-danger">
+            <button class="delete" (click)='errorMessage=None;'></button>
+            That user already exists!
+          </div>
+
+          <div class="field">
+            <p class="control has-icons-left" [ngClass]="{'has-icons-right': !signUpForm.controls['username'].valid && !signUpForm.controls['username'].pristine }">
+              <input class="input" type="text" [ngClass]="{'is-danger': !signUpForm.controls['username'].valid && !signUpForm.controls['username'].pristine }" name="username" placeholder="Username" [formControl]="signUpForm.controls['username']">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+              <span class="icon is-small is-right" *ngIf="!signUpForm.controls['username'].valid && !signUpForm.controls['username'].pristine">
+                <i class="fa fa-warning"></i>
+              </span>
+            </p>
+            <p class="help is-danger" *ngIf="!signUpForm.controls['username'].valid && !signUpForm.controls['username'].pristine">This username is invalid</p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left" [ngClass]="{'has-icons-right': !signUpForm.controls['email'].valid && !signUpForm.controls['email'].pristine }">
+              <input class="input" type="text" [ngClass]="{'is-danger': !signUpForm.controls['email'].valid && !signUpForm.controls['email'].pristine }" name="email" placeholder="Email" [formControl]="signUpForm.controls['email']">
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right" *ngIf="!signUpForm.controls['email'].valid  && !signUpForm.controls['email'].pristine">
+                <i class="fa fa-warning"></i>
+              </span>
+            </p>
+            <p class="help is-danger" *ngIf="!signUpForm.controls['email'].valid && !signUpForm.controls['email'].pristine">This email is invalid</p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left"  [ngClass]="{'has-icons-right': !signUpForm.controls['password'].valid && !signUpForm.controls['password'].pristine }">
+              <input class="input" type="password" [ngClass]="{'is-danger': !signUpForm.controls['password'].valid && !signUpForm.controls['password'].pristine }" name="password" placeholder="Password" [formControl]="signUpForm.controls['password']">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right" *ngIf="!signUpForm.controls['password'].valid  && !signUpForm.controls['password'].pristine">
+                <i class="fa fa-warning"></i>
+              </span>
+            </p>
+            <p class="help is-danger" *ngIf="!signUpForm.controls['password'].valid && !signUpForm.controls['password'].pristine">Please enter a password</p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success is-fullwidth" [disabled]="!signUpForm.valid">
+                Register
+              </button>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <a class="button is-fullwidth" [routerLink]="['/']">Login</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

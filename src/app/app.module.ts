@@ -5,17 +5,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { SemSelectorComponent } from './sem-selector/sem-selector.component';
 import { RecordsComponent } from './records/records.component';
 
-import { BranchServiceService } from './branch-service.service';
-import { RecordsServiceService } from './records-service.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 
+import { BranchServiceService } from './branch-service.service';
+import { RecordsServiceService } from './records-service.service';
+import { RegistrationService } from './registration.service';
+import { LoginService } from './login.service';
+
+import { AuthGuard } from './_guards/auth.guard';
+import { JwtHelper } from 'angular2-jwt';
+
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent },
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: '', component: LoginComponent }
 ]
@@ -23,7 +28,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    SemSelectorComponent,
     RecordsComponent,
     LoginComponent,
     HomeComponent,
@@ -37,6 +41,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    AuthGuard,
+    JwtHelper,
+    LoginService,
+    RegistrationService,
     BranchServiceService,
     RecordsServiceService
   ],
