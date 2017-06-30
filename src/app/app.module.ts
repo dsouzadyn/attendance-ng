@@ -20,6 +20,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { JwtHelper } from 'angular2-jwt';
 
 const appRoutes: Routes = [
+  {path: 'records/:branch/:semester', component: RecordsComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: '', component: LoginComponent }

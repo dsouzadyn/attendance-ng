@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   submitForm(value: any): void {
-    console.log(value);
+    this.router.navigate(['/records', value.branch, value.semester]);
   }
 
 }

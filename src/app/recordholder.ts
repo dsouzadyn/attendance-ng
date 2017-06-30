@@ -1,8 +1,11 @@
 export class RecordHolder {
   id: number;
-  branch_id: number;
-  cols: number;
+  branch: number;
   semester: number;
-  abbr: string;
-  subject_name: string;
+  subject: {
+    id: number;
+    abbr: string;
+    sub_type: number;
+    subject_name: string;
+  };
 }

@@ -43,7 +43,6 @@ export class LoginService {
   }
 
   isLoggedIn() {
-    console.log(this.jwtHelper.decodeToken(this.token));
     return this.token && !this.jwtHelper.isTokenExpired(this.token);
   }
 

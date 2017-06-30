@@ -9,6 +9,7 @@
       <div class="box">
         <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
           <p class="subtitle has-text-centered">Sign In</p>
+          
           <div class="field">
             <p class="control has-icons-left" [ngClass]="{'has-icons-right': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }">
               <input class="input" type="text" [ngClass]="{'is-danger': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }" name="username" placeholder="Username" [formControl]="loginForm.controls['username']">

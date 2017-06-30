@@ -8,11 +8,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
 import { RecordHolder } from './recordholder';
+import { AttendanceHolder } from './AttendanceHolder';
 
 @Injectable()
 export class RecordsServiceService {
 
   private subjectHolderBaseUrl = 'http://localhost:8000/api/subjectholder/';
+  private attendaceBaseUrl = 'http://localhost:8000/api/attendance/';
 
   constructor(private http: Http, private authService: LoginService) { }
 
@@ -20,6 +22,13 @@ export class RecordsServiceService {
     let headers = new Headers({'Authorization': 'JWT ' + this.authService.token });
     let options = new RequestOptions({ headers : headers });
     return this.http.get(this.subjectHolderBaseUrl + branch + '/' + semester + '/', options)
+            .map(this.extractData).catch(this.handleError);
+  }
+
+  getAttendances(branch: number, semester: number): Observable<AttendanceHolder[]> {
+    let headers = new Headers({'Authorization': 'JWT ' + this.authService.token });
+    let options = new RequestOptions({ headers : headers });
+    return this.http.get(this.attendaceBaseUrl + branch + '/' + semester + '/', options)
             .map(this.extractData).catch(this.handleError);
   }
 
