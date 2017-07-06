@@ -25,7 +25,7 @@ export class DefaulterselectorComponent implements OnInit {
   }
 
   submitForm(value: any): void {
-    this.router.navigate(['/defaulter_records', value.branch, value.semester]);
+    this.router.navigate(['/defaulter_records', value.branch]);
   }
 
 }

@@ -25,6 +25,7 @@ import { DefaulterrecordsComponent } from './defaulterrecords/defaulterrecords.c
 
 const appRoutes: Routes = [
   {path: 'records/:branch/:semester', component: RecordsComponent, canActivate: [AuthGuard]},
+  {path: 'defaulter_records/:branch', component: DefaulterrecordsComponent, canActivate: [AuthGuard]},
   {path: 'defaulter', component: DefaulterselectorComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
