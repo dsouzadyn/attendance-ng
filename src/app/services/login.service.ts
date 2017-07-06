@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
-
+import { APISettings } from './API.settings';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -11,12 +11,13 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class LoginService {
 
-  private loginEndpoint = 'http://localhost:8000/api/auth/login/'
+  private loginEndpoint;
   public token: string;
 
 
 
-  constructor(private http: Http, private jwtHelper: JwtHelper) {
+  constructor(private http: Http, private jwtHelper: JwtHelper, private api: APISettings) {
+    this.loginEndpoint = this.api.baseUrl +'/api/auth/login/';
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }

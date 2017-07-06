@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from './services/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styles: [require('bulma')],
   encapsulation: ViewEncapsulation.None
 })
+
 export class AppComponent {
 
   isMenuOpen = false;

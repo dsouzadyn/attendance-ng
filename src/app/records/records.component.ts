@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecordHolder } from '../recordholder';
-import { AttendanceHolder } from '../AttendanceHolder'
-import { RecordsServiceService } from '../records-service.service';
+import { RecordHolder } from '../services/recordholder';
+import { AttendanceHolder } from '../services/AttendanceHolder'
+import { RecordsServiceService } from '../services/records-service.service';
 
 
 @Component({
@@ -12,15 +12,7 @@ import { RecordsServiceService } from '../records-service.service';
 })
 
 export class RecordsComponent implements OnInit {
-  // subjectList = [
-  //     {'title': 'Applied Mathematics 4', 'sform': 'AM-IV', 'stype':1},
-  //     {'title': 'Database Management Systems', 'sform': 'DBMS', 'stype':1},
-  //     {'title': 'Computer Organisation and Architecture', 'sform': 'COA', 'stype':1},
-  //     {'title': 'Computer Graphics', 'sform': 'CG', 'stype':1},
-  //     {'title': 'Analysis of Algorithms', 'sform': 'AOA', 'stype':1},
-  //     {'title': 'Theoratical Computer Science', 'sform': 'TCS', 'stype':2},
-  // ];
-  //
+
 
   errorMessage: string;
   subjectList: RecordHolder[];

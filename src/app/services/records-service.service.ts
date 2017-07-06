@@ -9,14 +9,17 @@ import 'rxjs/add/observable/throw';
 
 import { RecordHolder } from './recordholder';
 import { AttendanceHolder } from './AttendanceHolder';
+import { APISettings } from './API.settings';
 
 @Injectable()
 export class RecordsServiceService {
+  private subjectHolderBaseUrl;
+  private attendaceBaseUrl;
 
-  private subjectHolderBaseUrl = 'http://localhost:8000/api/subjectholder/';
-  private attendaceBaseUrl = 'http://localhost:8000/api/attendance/';
-
-  constructor(private http: Http, private authService: LoginService) { }
+  constructor(private http: Http, private authService: LoginService, private api: APISettings) {
+     this.subjectHolderBaseUrl = this.api.baseUrl + '/api/subjectholder/';
+     this.attendaceBaseUrl = this.api.baseUrl + '/api/attendance/';
+  }
 
   getSubjectHolders(branch: number, semester: number): Observable<RecordHolder[]> {
     let headers = new Headers({'Authorization': 'JWT ' + this.authService.token });

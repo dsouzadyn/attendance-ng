@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SemSelectorComponent } from './sem-selector.component';
+import { DefaulterselectorComponent } from './defaulterselector.component';
 
-describe('SemSelectorComponent', () => {
-  let component: SemSelectorComponent;
-  let fixture: ComponentFixture<SemSelectorComponent>;
+describe('DefaulterselectorComponent', () => {
+  let component: DefaulterselectorComponent;
+  let fixture: ComponentFixture<DefaulterselectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SemSelectorComponent ]
+      declarations: [ DefaulterselectorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SemSelectorComponent);
+    fixture = TestBed.createComponent(DefaulterselectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

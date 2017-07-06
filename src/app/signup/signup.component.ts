@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../services/registration.service';
 
-import { RegistrationHolder } from '../registrationholder';
+import { RegistrationHolder } from '../services/registrationholder';
 
 @Component({
   selector: 'app-signup',

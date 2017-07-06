@@ -1,0 +1,41 @@
+<div class="container is-fluid" style="margin-top:128px;padding-bottom:98px;">
+  <div class="columns">
+    <div class="column is-4 is-offset-4">
+      <div *ngIf='errorMessage' class="notification is-danger">
+        <button class="delete" (click)='errorMessage=None;'></button>
+        {{ errorMessage }}
+      </div>
+      <div class="box">
+        <form [formGroup]="selectorForm" (ngSubmit)="submitForm(selectorForm.value)">
+          <p class="subtitle has-text-centered">Defaulter List</p>
+          <div class="field">
+            <label class="label">Branch</label>
+            <p class="control">
+              <span class="select is-fullwidth">
+                <select name="branch" [formControl]="selectorForm.controls['branch']">
+                  <option value="1">Computer Engineering</option>
+                  <option value="2">Mechanical Engineering</option>
+                  <option value="3">Electrical Engineering</option>
+                  <option value="4">Information Technology</option>
+                  <option value="5">EXTC</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success is-fullwidth" [disabled]="!selectorForm.valid">
+                Go
+              </button>
+            </p>
+          </div>
+
+
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

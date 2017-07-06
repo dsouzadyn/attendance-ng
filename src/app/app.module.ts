@@ -11,16 +11,21 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 
-import { BranchServiceService } from './branch-service.service';
-import { RecordsServiceService } from './records-service.service';
-import { RegistrationService } from './registration.service';
-import { LoginService } from './login.service';
+import { APISettings } from './services/API.settings';
+
+import { BranchServiceService } from './services/branch-service.service';
+import { RecordsServiceService } from './services/records-service.service';
+import { RegistrationService } from './services/registration.service';
+import { LoginService } from './services/login.service';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { JwtHelper } from 'angular2-jwt';
+import { DefaulterselectorComponent } from './defaulterselector/defaulterselector.component';
+import { DefaulterrecordsComponent } from './defaulterrecords/defaulterrecords.component';
 
 const appRoutes: Routes = [
   {path: 'records/:branch/:semester', component: RecordsComponent, canActivate: [AuthGuard]},
+  {path: 'defaulter', component: DefaulterselectorComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: '', component: LoginComponent }
@@ -32,7 +37,9 @@ const appRoutes: Routes = [
     RecordsComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    DefaulterselectorComponent,
+    DefaulterrecordsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ const appRoutes: Routes = [
     LoginService,
     RegistrationService,
     BranchServiceService,
-    RecordsServiceService
+    RecordsServiceService,
+    APISettings
   ],
   bootstrap: [AppComponent]
 })
