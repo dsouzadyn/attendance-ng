@@ -1,5 +1,6 @@
 export class AttendanceHolder {
   id: number;
+  batch_no: number;
   student: {
     id: number,
     branch: number,

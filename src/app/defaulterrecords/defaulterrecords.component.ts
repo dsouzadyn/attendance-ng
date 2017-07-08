@@ -14,18 +14,20 @@ export class DefaulterrecordsComponent implements OnInit {
   errorMessage: string;
   subjectList: RecordHolder[];
   mode = 'Observable';
-  attendanceList: AttendanceHolder[];
-  defaultersList: AttendanceHolder[];
+  attendanceList: AttendanceHolder[] = [];
+  defaultersList: AttendanceHolder[] = [];
   semester: number;
   branch: number;
   sub: any;
+
   constructor(private recordsService: RecordsServiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.branch = params['branch'];
-      this.getSubjectHolders(this.branch, 4);
+      //this.getSubjectHolders(this.branch, 4);
       this.getAttendances(this.branch, 4);
+      this.getAttendances(this.branch, 8);
     });
     //this.getSubjectHolders();
   }
@@ -54,7 +56,8 @@ export class DefaulterrecordsComponent implements OnInit {
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
           });
         });
-        this.defaultersList = attendanceList.filter(function (at: AttendanceHolder) {
+
+        this.defaultersList = this.defaultersList.concat(attendanceList.filter(function (at: AttendanceHolder) {
           at.subs = at["subs"];
           let total = 0;
           let act = 0;
@@ -69,6 +72,18 @@ export class DefaulterrecordsComponent implements OnInit {
               total += at["subs"][i].theory[0].total;
               act += at["subs"][i].theory[0].actual;
             }
+            if(at["subs"][i].subject.sub_type == 3) {
+              total += at["subs"][i].practical[0].total;
+              act += at["subs"][i].practical[0].actual;
+            }
+            if(at["subs"][i].subject.sub_type == 4) {
+              if(at["subs"][i].theory[0].total != 0 && at["subs"][i].practical[0].total != 0) {
+                total += at["subs"][i].theory[0].total;
+                total += at["subs"][i].practical[0].total;
+                act += at["subs"][i].theory[0].actual;
+                act += at["subs"][i].practical[0].actual;
+              }
+            }
 
           }
           if((act/total) < 0.75) {
@@ -76,7 +91,8 @@ export class DefaulterrecordsComponent implements OnInit {
           } else {
             return false;
           }
-        });
+        }));
+
       },
       error => this.errorMessage = error
     );

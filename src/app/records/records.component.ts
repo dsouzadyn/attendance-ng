@@ -38,7 +38,7 @@ export class RecordsComponent implements OnInit {
   getSubjectHolders(branch: number, semester: number) {
     this.recordsService.getSubjectHolders(branch, semester).subscribe(
       subjectList => {
-
+        console.log(subjectList);
         this.subjectList = subjectList.sort(function (a, b) {
           var textA = a.subject.subject_name.toLowerCase();
           var textB = b.subject.subject_name.toLowerCase();
@@ -53,6 +53,8 @@ export class RecordsComponent implements OnInit {
     this.recordsService.getAttendances(branch, semester).subscribe(
       attendanceList => {
         this.attendanceList = attendanceList;
+
+
         this.attendanceList.forEach((at: AttendanceHolder) => {
           at.subs = at["subs"].sort(function (a, b) {
             var textA = a.subject.subject_name.toLowerCase();
@@ -60,6 +62,7 @@ export class RecordsComponent implements OnInit {
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
           });
         });
+        console.log(this.attendanceList);
       },
       error => this.errorMessage = error
     )
