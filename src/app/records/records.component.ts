@@ -42,7 +42,15 @@ export class RecordsComponent implements OnInit {
         this.subjectList = subjectList.sort(function (a, b) {
           var textA = a.subject.subject_name.toLowerCase();
           var textB = b.subject.subject_name.toLowerCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+          if (textA == 'extra') {
+            return 1;
+          }
+          else if(textB == 'extra') {
+            return 0;
+          }
+          else {
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+          }
         });
       },
       error => this.errorMessage = error
@@ -54,15 +62,38 @@ export class RecordsComponent implements OnInit {
       attendanceList => {
         this.attendanceList = attendanceList;
 
+        for(var i = 0; i < this.attendanceList.length; i++) {
+          this.attendanceList[i].subs = this.attendanceList[i].subs.sort(function (a, b) {
 
-        this.attendanceList.forEach((at: AttendanceHolder) => {
-          at.subs = at["subs"].sort(function (a, b) {
-            var textA = a.subject.subject_name.toLowerCase();
-            var textB = b.subject.subject_name.toLowerCase();
-            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+              var textA = a.subject.subject_name.toLowerCase();
+              var textB = b.subject.subject_name.toLowerCase();
+              console.log(textB);
+              if (textA == 'extra') {
+                return 1;
+              }
+              else if(textB == 'extra') {
+                return 0;
+              }
+              else {
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+              }
           });
-        });
-        console.log(this.attendanceList);
+        }
+        // this.attendanceList.forEach((at: AttendanceHolder) => {
+        //   at.subs = at.subs.sort(function (a, b) {
+        //
+        //     var textA = a.subject.subject_name.toLowerCase();
+        //     var textB = b.subject.subject_name.toLowerCase();
+        //     if(textB) {
+        //       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        //     }
+        //     else {
+        //       return 0;
+        //     }
+        //
+        //   });
+        // });
+
       },
       error => this.errorMessage = error
     )

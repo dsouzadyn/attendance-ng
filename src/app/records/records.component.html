@@ -17,6 +17,9 @@
             <ng-container *ngIf="subject.subject.sub_type === 3">
               <th colspan="2"><abbr title="{{ subject.subject.subject_name }}">{{ subject.subject.abbr }}</abbr></th>
             </ng-container>
+            <ng-container *ngIf="subject.subject.sub_type === 5">
+              <th colspan="1"><abbr title="{{ subject.subject.subject_name }}">{{ subject.subject.abbr }}</abbr></th>
+            </ng-container>
           </ng-container>
         </tr>
         <tr>
@@ -34,6 +37,9 @@
             </ng-container>
             <ng-container *ngIf="subject.subject.sub_type === 3">
               <th>PR</th>
+              <th>TOTAL</th>
+            </ng-container>
+            <ng-container *ngIf="subject.subject.sub_type === 5">
               <th>TOTAL</th>
             </ng-container>
           </ng-container>
@@ -75,14 +81,13 @@
               </ng-container>
             </ng-container>
           </tr>
-          <h3 class="subtitle">Batch 3</h3>
           <tr *ngFor="let attendance of attendanceList">
             <ng-container *ngIf="attendance.batch_no === 4">
               <td>{{attendance.student.roll_no}}</td>
               <td>{{attendance.student.first_name + ' ' + attendance.student.last_name}}</td>
               <ng-container *ngFor="let subs of attendance.subs">
 
-                  <td *ngIf="subs.subject.sub_type === 1 || subs.subject.sub_type === 2 || subs.subject.sub_type === 4" >{{subs.theory[0]['actual']}}</td>
+                  <td *ngIf="subs.subject.sub_type === 1 || subs.subject.sub_type === 2 || subs.subject.sub_type === 4">{{subs.theory[0]['actual']}}</td>
                   <td *ngIf="subs.subject.sub_type === 1 || subs.subject.sub_type === 3 || subs.subject.sub_type === 4" >{{subs.practical[0]['actual']}}</td>
                   <td>{{subs.theory[0]['actual'] + subs.practical[0]['actual']}}</td>
               </ng-container>
