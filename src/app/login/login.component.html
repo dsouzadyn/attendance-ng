@@ -1,15 +1,15 @@
-<div class="container is-fluid" style="margin-top:64px;">
+<div class="" style="padding-top:64px;padding-bottom:64px;background:#00d1b2;">
   <div class="columns">
-    <div class="column is-12">
+    <div class="column is-4 is-offset-6">
       <h1 class="title is-2 has-text-centered">Attend.ly</h1>
     </div>
   </div>
   <div class="columns">
-    <div class="column is-4 is-offset-4" style="box-sizing: border-box;padding:18px;">
+    <div class="column is-4 is-offset-6" style="box-sizing: border-box;padding:18px;">
       <div class="box">
         <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
           <p class="subtitle has-text-centered">Sign In</p>
-          
+
           <div class="field">
             <p class="control has-icons-left" [ngClass]="{'has-icons-right': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }">
               <input class="input" type="text" [ngClass]="{'is-danger': !loginForm.controls['username'].valid && !loginForm.controls['username'].pristine }" name="username" placeholder="Username" [formControl]="loginForm.controls['username']">

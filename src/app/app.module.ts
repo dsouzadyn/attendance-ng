@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
-
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 
@@ -22,11 +22,15 @@ import { AuthGuard } from './_guards/auth.guard';
 import { JwtHelper } from 'angular2-jwt';
 import { DefaulterselectorComponent } from './defaulterselector/defaulterselector.component';
 import { DefaulterrecordsComponent } from './defaulterrecords/defaulterrecords.component';
+import { AnalyserHomeComponent } from './analyser-home/analyser-home.component';
+import { InsightsComponent } from './insights/insights.component';
 
 const appRoutes: Routes = [
   {path: 'records/:branch/:semester', component: RecordsComponent, canActivate: [AuthGuard]},
   {path: 'defaulter_records/:branch', component: DefaulterrecordsComponent, canActivate: [AuthGuard]},
   {path: 'defaulter', component: DefaulterselectorComponent, canActivate: [AuthGuard]},
+  {path: 'analyse', component: AnalyserHomeComponent, canActivate: [AuthGuard]},
+  {path: 'insights', component: InsightsComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: '', component: LoginComponent }
@@ -35,18 +39,23 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+
     RecordsComponent,
     LoginComponent,
     HomeComponent,
     SignupComponent,
     DefaulterselectorComponent,
-    DefaulterrecordsComponent
+    DefaulterrecordsComponent,
+    AnalyserHomeComponent,
+    InsightsComponent
   ],
   imports: [
+
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ChartsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

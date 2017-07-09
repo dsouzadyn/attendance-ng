@@ -1,0 +1,70 @@
+<div class="container is-fluid" style="margin-top:64px;">
+  <div class="columns">
+    <div class="column is-3">
+      <div *ngIf='errorMessage' class="notification is-danger">
+        <button class="delete" (click)='errorMessage=None;'></button>
+        {{ errorMessage }}
+      </div>
+      <div class="box">
+        <form [formGroup]="selectorForm" (ngSubmit)="submitForm(selectorForm.value)">
+          <p class="subtitle has-text-centered">Class Selector</p>
+          <div class="field">
+            <label class="label">Branch</label>
+            <p class="control">
+              <span class="select is-fullwidth">
+                <select name="branch" [formControl]="selectorForm.controls['branch']">
+                  <option value="1">Computer Engineering</option>
+                  <option value="2">Mechanical Engineering</option>
+                  <option value="3">Electrical Engineering</option>
+                  <option value="4">Information Technology</option>
+                  <option value="5">EXTC</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <label class="label">Semester</label>
+            <p class="control">
+              <span class="select is-fullwidth">
+                <select name="semester" [formControl]="selectorForm.controls['semester']">
+                  <option value='1'>1</option>
+                  <option value='2'>2</option>
+                  <option value='3'>3</option>
+                  <option value='4'>4</option>
+                  <option value='5'>5</option>
+                  <option value='6'>6</option>
+                  <option value='7'>7</option>
+                  <option value='8'>8</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success is-fullwidth" [disabled]="!selectorForm.valid">
+                View
+              </button>
+            </p>
+          </div>
+
+
+
+        </form>
+
+      </div>
+
+    </div>
+    <div class="column is-9" style="display:block;">
+    <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+
+</div>
