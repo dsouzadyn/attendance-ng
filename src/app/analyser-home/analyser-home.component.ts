@@ -13,7 +13,11 @@ export class AnalyserHomeComponent implements OnInit {
   }
 
   viewInsights() {
-    this.router.navigate(['/insights'])
+    this.router.navigate(['/insights']);
+  }
+
+  viewCompare() {
+    this.router.navigate(['/compare']);
   }
 
 }

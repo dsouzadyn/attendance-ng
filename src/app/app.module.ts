@@ -24,6 +24,9 @@ import { DefaulterselectorComponent } from './defaulterselector/defaulterselecto
 import { DefaulterrecordsComponent } from './defaulterrecords/defaulterrecords.component';
 import { AnalyserHomeComponent } from './analyser-home/analyser-home.component';
 import { InsightsComponent } from './insights/insights.component';
+import { ComparerComponent } from './comparer/comparer.component';
+
+import { RoundPipe } from './pipes/round.pipe';
 
 const appRoutes: Routes = [
   {path: 'records/:branch/:semester', component: RecordsComponent, canActivate: [AuthGuard]},
@@ -31,6 +34,7 @@ const appRoutes: Routes = [
   {path: 'defaulter', component: DefaulterselectorComponent, canActivate: [AuthGuard]},
   {path: 'analyse', component: AnalyserHomeComponent, canActivate: [AuthGuard]},
   {path: 'insights', component: InsightsComponent, canActivate: [AuthGuard]},
+  {path: 'compare', component: ComparerComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'signup', component: SignupComponent},
   {path: '', component: LoginComponent }
@@ -39,7 +43,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-
+    RoundPipe,
     RecordsComponent,
     LoginComponent,
     HomeComponent,
@@ -47,7 +51,8 @@ const appRoutes: Routes = [
     DefaulterselectorComponent,
     DefaulterrecordsComponent,
     AnalyserHomeComponent,
-    InsightsComponent
+    InsightsComponent,
+    ComparerComponent
   ],
   imports: [
 

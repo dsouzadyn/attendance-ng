@@ -12,6 +12,9 @@ export class InsightsComponent implements OnInit {
   attendanceList: AttendanceHolder[] = [];
   errMsg: string;
   sub: any;
+  public doughnutChartLabels:string[] = ['Excellent', 'Good', 'Fair', 'Poor'];
+  public doughnutChartData:number[] = [0, 0, 0, 0];
+  public doughnutChartType:string = 'doughnut';
   constructor(
     private recordsService: RecordsServiceService,
     fb: FormBuilder
@@ -75,6 +78,7 @@ export class InsightsComponent implements OnInit {
     this.getAttendances(value.branch, value.semester);
   }
   getAttendances(branch: number, semester: number) {
+    let dchartData = [0, 0, 0, 0];
     this.recordsService.getAttendances(branch, semester).subscribe(
       attendanceList => {
         let lineChartData = [];
@@ -126,10 +130,20 @@ export class InsightsComponent implements OnInit {
 
             }
             let per = act/total;
+            if(per >= 0.95) {
+              dchartData[0] += 1;
+            } else if (per < 0.95 && per >= 0.80) {
+              dchartData[1] += 1;
+            } else if (per < 0.80 && per > 0.76) {
+              dchartData[2] += 1;
+            } else {
+              dchartData[3] += 1;
+            }
             labels.push('');
             count++;
             lineChartData.push(Math.round(per*100));
           });
+          this.doughnutChartData = dchartData;
           this.lineChartData[0].data = lineChartData;
           this.lineChartLabels = labels;
         }

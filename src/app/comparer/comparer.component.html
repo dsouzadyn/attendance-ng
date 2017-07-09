@@ -1,0 +1,163 @@
+<div class="container is-fluid" style="margin-top:64px;">
+  <div class="columns">
+    <div class="column is-3">
+      <div *ngIf='errorMessage' class="notification is-danger">
+        <button class="delete" (click)='errorMessage=None;'></button>
+        {{ errorMessage }}
+      </div>
+      <div class="box">
+        <form [formGroup]="selectorForm" (ngSubmit)="submitForm(selectorForm.value)">
+          <p class="subtitle has-text-centered">Class Selector</p>
+          <div class="field">
+            <label class="label">Branch</label>
+            <p class="control">
+              <span class="select is-fullwidth">
+                <select name="branch" [formControl]="selectorForm.controls['branch']">
+                  <option value="1">Computer Engineering</option>
+                  <option value="2">Mechanical Engineering</option>
+                  <option value="3">Electrical Engineering</option>
+                  <option value="4">Information Technology</option>
+                  <option value="5">EXTC</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <label class="label">Semester</label>
+            <p class="control">
+              <span class="select is-fullwidth">
+                <select name="semester" [formControl]="selectorForm.controls['semester']">
+                  <option value='1'>1</option>
+                  <option value='2'>2</option>
+                  <option value='3'>3</option>
+                  <option value='4'>4</option>
+                  <option value='5'>5</option>
+                  <option value='6'>6</option>
+                  <option value='7'>7</option>
+                  <option value='8'>8</option>
+                </select>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button type="submit" class="button is-success is-fullwidth" [disabled]="!selectorForm.valid">
+                View
+              </button>
+            </p>
+          </div>
+
+
+
+        </form>
+
+      </div>
+
+    </div>
+    <div class="column is-4 is-offset-1" *ngIf="!attendanceList">
+      <h1 class="subtitle">Please select a class</h1>
+    </div>
+    <div class="column is-4 is-offset-1" *ngIf="attendanceList">
+      <div class="field">
+        <label class="label">Student 1</label>
+        <p class="control">
+          <span class="select is-fullwidth" >
+            <select name="branch" [(ngModel)]="selectedValOne" (change)="dataOneChange(selectedValOne)">
+              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.first_name}} {{a.student.last_name}}</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <p class="subtitle" *ngIf="!selectedValOne">Select a student</p>
+          <article class="tile is-child box" *ngIf="selectedValOne">
+
+            <p class="title">{{selectedValOne.student.first_name}} {{selectedValOne.student.last_name}}</p>
+            <hr/>
+            <p class="subtitle">Theory</p>
+            <!-- <p *ngFor="let so of selectedValOne.subs">
+              <ng-container *ngIf="so.subject.sub_type != 4 && so.subject.sub_type != 3">{{so.subject.abbr}}: {{ (so.theory[0].actual/so.theory[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="so.subject.sub_type == 4 && so.theory[0].total != 0">{{so.subject.abbr}}: {{ (so.theory[0].actual/so.theory[0].total)*100 | round}} %</ng-container>
+            </p> -->
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="radarChartOneTheory"
+                      [labels]="radarChartLabelsOneTheory"
+                      [chartType]="radarChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+            <hr/>
+            <p class="subtitle">Practicals</p>
+            <!-- <p *ngFor="let so of selectedValOne.subs">
+              <ng-container *ngIf="so.subject.sub_type != 4 && so.subject.sub_type != 3 && so.subject.sub_type != 5">{{so.subject.abbr}}: {{ (so.practical[0].actual/so.practical[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="so.subject.sub_type == 3">{{so.subject.abbr}}: {{ (so.practical[0].actual/so.practical[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="so.subject.sub_type == 4 && so.practical[0].total != 0">{{so.subject.abbr}}: {{ (so.practical[0].actual/so.practical[0].total)*100 | round}} %</ng-container>
+            </p> -->
+            <div style="display: block">
+            <canvas baseChart
+                    [datasets]="radarChartOnePracs"
+                    [labels]="radarChartLabelsOnePracs"
+                    [chartType]="radarChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="column is-4" *ngIf="attendanceList">
+      <div class="field">
+        <label class="label">Student 2</label>
+        <p class="control">
+
+          <span class="select is-fullwidth" >
+            <select name="branch" [(ngModel)]="selectedValTwo" (change)="dataTwoChange(selectedValTwo)">
+              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.first_name}} {{a.student.last_name}}</option>
+            </select>
+          </span>
+        </p>
+      </div>
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <p class="subtitle" *ngIf="!selectedValTwo">Select a student</p>
+          <article class="tile is-child box" *ngIf="selectedValTwo">
+
+            <p class="title">{{selectedValTwo.student.first_name}} {{selectedValTwo.student.last_name}}</p>
+            <hr/>
+            <p class="subtitle">Theory</p>
+            <!-- <p *ngFor="let st of selectedValTwo.subs">
+              <ng-container *ngIf="st.subject.sub_type != 4 && st.subject.sub_type != 3">{{st.subject.abbr}}: {{(st.theory[0].actual/st.theory[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="st.subject.sub_type == 4 && st.theory[0].total != 0">{{st.subject.abbr}}: {{(st.theory[0].actual/st.theory[0].total)*100 | round}} %</ng-container>
+            </p> -->
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="radarChartTwoTheory"
+                      [labels]="radarChartLabelsTwoTheory"
+                      [chartType]="radarChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+            <hr/>
+            <p class="subtitle">Practicals</p>
+            <!-- <p *ngFor="let st of selectedValTwo.subs">
+              <ng-container *ngIf="st.subject.sub_type != 4 && st.subject.sub_type != 3 && st.subject.sub_type != 5">{{st.subject.abbr}}: {{(st.practical[0].actual/st.practical[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="st.subject.sub_type == 3">{{st.subject.abbr}}: {{ (st.practical[0].actual/st.practical[0].total)*100 | round}} %</ng-container>
+              <ng-container *ngIf="st.subject.sub_type == 4 && st.practical[0].total != 0">{{st.subject.abbr}}: {{ (st.practical[0].actual/st.practical[0].total)*100 | round}} %</ng-container>
+            </p> -->
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="radarChartTwoPracs"
+                      [labels]="radarChartLabelsTwoPracs"
+                      [chartType]="radarChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
