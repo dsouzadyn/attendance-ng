@@ -63,7 +63,7 @@
         <p class="control">
           <span class="select is-fullwidth" >
             <select name="branch" [(ngModel)]="selectedValOne" (change)="dataOneChange(selectedValOne)">
-              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.first_name}} {{a.student.last_name}}</option>
+              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.roll_no}}</option>
             </select>
           </span>
         </p>
@@ -114,7 +114,7 @@
 
           <span class="select is-fullwidth" >
             <select name="branch" [(ngModel)]="selectedValTwo" (change)="dataTwoChange(selectedValTwo)">
-              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.first_name}} {{a.student.last_name}}</option>
+              <option *ngFor="let a of attendanceList" [ngValue]="a">{{a.student.roll_no}}</option>
             </select>
           </span>
         </p>

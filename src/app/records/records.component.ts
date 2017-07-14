@@ -67,7 +67,6 @@ export class RecordsComponent implements OnInit {
 
               var textA = a.subject.subject_name.toLowerCase();
               var textB = b.subject.subject_name.toLowerCase();
-              console.log(textB);
               if (textA == 'extra') {
                 return 1;
               }
